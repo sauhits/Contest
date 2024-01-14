@@ -103,7 +103,6 @@ public class MapData {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 mapImageViews[y][x] = new ImageView(mapImages[getDetailImage(x, y)]);
-
             }
         }
     }
