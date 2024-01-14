@@ -23,9 +23,9 @@ public class MapData {
 
     private Image[] mapImages;
     private ImageView[][] mapImageViews;
-    private int[][] maps;
-    private int width; // width of the map
-    private int height; // height of the map
+    private static int[][] maps;
+    private static int width; // width of the map
+    private static int height; // height of the map
 
     MapData(int x, int y) {
         mapImages = new Image[13];
@@ -73,14 +73,14 @@ public class MapData {
         }
     }
 
-    public int getMap(int x, int y) {
+    public static int getMap(int x, int y) {
         if (x < 0 || width <= x || y < 0 || height <= y) {
             return -1;
         }
         return maps[y][x];
     }
 
-    public void setMap(int x, int y, int type) {
+    public static void setMap(int x, int y, int type) {
         if (x < 1 || width <= x - 1 || y < 1 || height <= y - 1) {
             return;
         }
@@ -127,52 +127,6 @@ public class MapData {
         }
 
         int enter = maps[y][x];
-        // 四隅の処理
-        if (x == 0 && y == 0) {
-            return 5;
-        }
-        if (x == 0 && y == (height - 1)) {
-            return 3;
-        }
-        if (x == (width - 1) && y == 0) {
-            return 6;
-        }
-        if (x == (width - 1) && y == (height - 1)) {
-            return 4;
-        }
-
-        // // 一番左の列
-        // if (y == 0) {
-        // if (right == 1) {
-        // return 8;
-        // } else {
-        // return 1;
-        // }
-        // }
-        // // 一番右の列
-        // if (y == (height - 1)) {
-        // if (left == 1) {
-        // return 10;
-        // } else {
-        // return 1;
-        // }
-        // }
-        // // 一番上の行
-        // if (x == 0) {
-        // if (under == 1) {
-        // return 9;
-        // } else {
-        // return 2;
-        // }
-        // }
-        // // 一番下の行
-        // if (x == (width - 1)) {
-        // if (top == 1) {
-        // return 7;
-        // } else {
-        // return 2;
-        // }
-        // }
 
         // SPACE
         if (enter == 0) {
@@ -233,11 +187,11 @@ public class MapData {
         return 1;
     }
 
-    public int getHeight() {
+    public static int getHeight() {
         return height;
     }
 
-    public int getWidth() {
+    public static int getWidth() {
         return width;
     }
 }

@@ -22,11 +22,11 @@ public class ItemDB {
 
     //
     public void updateSpaceList() {
-        for (int i = 0; i < MapData.maps.length; i++) {
-            for (int j = 0; j < MapDB.toShowMaze.length; j++) {
-                if (MapDB.coordinate[i][j] == MapDB.Map_TYPE_SPACE) {
-                    listMapSpaceCoordinate[SpaceCount][0] = i;
-                    listMapSpaceCoordinate[SpaceCount][1] = j;
+        for (int y = 0; y < MapData.getHeight(); y++) {
+            for (int x = 0; x < MapData.getWidth(); x++) {
+                if (MapData.getMap(x,y) == MapData.TYPE_SPACE) {
+                    listMapSpaceCoordinate[SpaceCount][0] = x;
+                    listMapSpaceCoordinate[SpaceCount][1] = y;
                     SpaceCount++;
                 }
             }
@@ -45,25 +45,10 @@ public class ItemDB {
 
     public void setItem(int Item) {
         int[] setCoordinate = getItemCoordinate();
-        switch (Item) {
-            case 10:
-                // BANANA
-                MapDB.coordinate[setCoordinate[0]][setCoordinate[1]] = BANANA;
-                break;
-            case 11:
-                // FISH
-                MapDB.coordinate[setCoordinate[0]][setCoordinate[1]] = FISH;
-                break;
-            case 12:
-                // SAKE
-                MapDB.coordinate[setCoordinate[0]][setCoordinate[1]] = SAKE;
-                break;
-            default:
-                System.out.println("Error: setItem");
-                break;
-        }
+        MapData.setMap(setCoordinate[0],setCoordinate[1],Item);
     }
 
+    // BANANA_STOP秒間停止する
     static void actionBANANA() {
         try {
             Thread.sleep(BANANA_STOP);
@@ -73,10 +58,12 @@ public class ItemDB {
         }
     }
 
+    // 移動量が2倍になる
     public void actionFISH() {
         moveFISHGain = 2;
     }
 
+    // 入力が逆になる
     public void actionSAKE() {
         moveSakeGain = -1;
         TimerTask task = new TimerTask() {
