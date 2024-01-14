@@ -133,58 +133,61 @@ public class MapData {
             return 0;
         }
 
-        // 縦一 (y+1)(y-1)=1 & (x+1)+(x-1)=0
-        else if ((under * top) == 1 && (right + left) == 0) {
+        // 縦一
+        else if (top == TYPE_WALL && under == TYPE_WALL && right != TYPE_WALL && left != TYPE_WALL) {
             return 2;
         }
-        // 横一 (x+1)(x-1)=1 & (y+1)+(y-1)=0
-        else if ((right * left) == 1 && (under + top) == 0) {
+        // 横一
+        else if (top != TYPE_WALL && under != TYPE_WALL && right == TYPE_WALL && left == TYPE_WALL) {
             return 1;
         }
 
-        // 上-右 (y-1)(x+1)=1 & (x-1)+(y+1)=0
-        else if ((top * right) == 1 && (left + under) == 0) {
+        // 上-右
+        else if (top == TYPE_WALL && right == TYPE_WALL && under != TYPE_WALL && left != TYPE_WALL) {
             return 6;
         }
         // 上-左 (y-1)(x-1)=1 & (x+1)+(y+1)=0
-        else if ((top * left) == 1 && (right + under) == 0) {
+        else if (top == TYPE_WALL && left == TYPE_WALL && under != TYPE_WALL && right != TYPE_WALL) {
             return 4;
         }
         // 下-右 (y+1)(x+1)=1 & (x-1)+(y-1)=0
-        else if ((under * right) == 1 && (left + top) == 0) {
+        else if (under == TYPE_WALL && right == TYPE_WALL && top != TYPE_WALL && left != TYPE_WALL) {
             return 5;
         }
         // 下-左 (y+1)(x-1)=1 & (x+1)+(y-1)=0
-        else if ((under * left) == 1 && (right + top) == 0) {
+        else if (under == TYPE_WALL && left == TYPE_WALL && top != TYPE_WALL && right != TYPE_WALL) {
             return 3;
         }
 
         // 下以外 (y-1)(x+1)(x-1)=1 & (y+1)=0
-        else if ((top * right * left) == 1 && under == 0) {
+        else if (top == TYPE_WALL && right == TYPE_WALL && left == TYPE_WALL && under != TYPE_WALL) {
             return 10;
         }
         // 左以外 (y-1)(y+1)(x+1)=1 & (x-1)=0
-        else if ((top * under * right) == 1 && left == 0) {
+        else if (top == TYPE_WALL && right == TYPE_WALL && under == TYPE_WALL && left != TYPE_WALL) {
             return 9;
         }
         // 上以外 (y+1)(x+1)(x-1)=1 & (y-1)=0
-        else if ((under * right * left) == 1 && top == 0) {
+        else if (under == TYPE_WALL && right == TYPE_WALL && left == TYPE_WALL && top != TYPE_WALL) {
             return 8;
         }
         // 右以外 (y-1)(y+1)(x-1)=1 & (x+1)=0
-        else if ((top * under * left) == 1 && right == 0) {
+        else if (top == TYPE_WALL && under == TYPE_WALL && left == TYPE_WALL && right != TYPE_WALL) {
             return 7;
         }
         // 十字 (x+1)(x-1)(y+1)(y-1)=1
-        else if ((top * under * left * right) == 1) {
+        else if (top == TYPE_WALL && right == TYPE_WALL && left == TYPE_WALL && under == TYPE_WALL) {
             return 11;
         }
-
         // 上右左以外 下右左以外
-        else if ((top + right + left) == 0 || (under + right + left) == 0) {
-            return 2;
+        else {
+            boolean localBoolean1 = (top != TYPE_WALL && right != TYPE_WALL && left != TYPE_WALL && under == TYPE_WALL);
+            boolean localBoolean2 = (under != TYPE_WALL && right != TYPE_WALL && left != TYPE_WALL && top == TYPE_WALL);
+            if (localBoolean1 || localBoolean2) {
+                return 2;
+            }
+            return 1;
         }
-        return 1;
     }
 
     public static int getHeight() {
