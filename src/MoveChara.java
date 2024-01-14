@@ -73,6 +73,13 @@ public class MoveChara {
             posX += dx;
             posY += dy;
             System.out.println("chara[X,Y]:" + posX + "," + posY);
+            // アイテム条件を後に追加する
+            if(mapData.getMap(posX, posY)==MapData.TYPE_GOAL){
+                System.out.println("GOAL");
+                StageDB.getMainStage().hide();
+                // StageDB.getMainSound().stop();
+                StageDB.getGameGoalStage().show();
+            }
             return true;
         } else {
             return false;

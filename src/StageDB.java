@@ -11,6 +11,7 @@ class StageDB {
 
     static private Stage mainStage = null;
     static private Stage gameOverStage = null;
+    static private Stage gameGoalStage = null;
     static private MediaPlayer mainSound = null;
     static private MediaPlayer gameOverSound = null;
     static private Class mainClass;
@@ -82,5 +83,21 @@ class StageDB {
             }
         }
         return gameOverStage;
+    }
+
+    public static Stage getGameGoalStage() {
+        if (gameGoalStage == null) {
+            try {
+                System.out.println("StageDB:getGameGoalStage()");
+                FXMLLoader loader = new FXMLLoader(mainClass.getResource("MapGameGoal.fxml"));
+                VBox root = loader.load();
+                Scene scene = new Scene(root);
+                gameGoalStage = new Stage();
+                gameGoalStage.setScene(scene);
+            } catch (IOException ioe) {
+                System.err.println(ioe);
+            }
+        }
+        return gameGoalStage;
     }
 }

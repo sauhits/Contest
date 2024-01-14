@@ -4,7 +4,7 @@ import javafx.scene.image.ImageView;
 public class MapData {
     public static final int TYPE_SPACE = 0;
     public static final int TYPE_WALL = 1;
-    public static final int TYPE_OTHERS = 2;
+    public static final int TYPE_GOAL = 16;
     private static final String mapImageFiles[] = {
             "png/SPACE.png", // 0
             "png/WALL-1.png", // 1
@@ -21,7 +21,8 @@ public class MapData {
             "png/WALL.png", // 12
             "png/bell.png", // 13 BANANA
             "png/apple.png", // 14 FISH
-            "png/pear.png"// 15 SAKE
+            "png/pear.png", // 15 SAKE
+            "png/GOAL.png"// 16 GOAL
     };
 
     private Image[] mapImages;
@@ -44,6 +45,8 @@ public class MapData {
         ItemDB.setItem(ItemDB.BANANA);
         ItemDB.setItem(ItemDB.FISH);
         ItemDB.setItem(ItemDB.SAKE);
+        int[] goal = getGoalCoordinate();
+        setMap(goal[0], goal[1], TYPE_GOAL);
         setImageViews();
     }
 
@@ -77,6 +80,60 @@ public class MapData {
                 digMap(x + dx * 2, y + dy * 2);
             }
         }
+    }
+
+    public static int[] getGoalCoordinate() {
+        int[] goal = new int[2];
+        int localCount = 0;
+        // 変更の余地あり
+        int[][] candidate = new int[30][2];
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                // 方向指定
+                int top = 0;
+                int under = 0;
+                int right = 0;
+                int left = 0;
+                int enter = maps[y][x];
+                if ((x - 1) >= 0) {
+                    top = maps[y][x - 1];
+                }
+                if ((x + 1) < width) {
+                    under = maps[y][x + 1];
+                }
+                if ((y - 1) >= 0) {
+                    left = maps[y - 1][x];
+                }
+                if ((y + 1) < height) {
+                    right = maps[y + 1][x];
+                }
+                // 条件の精査
+                boolean localTerm1 = (top == TYPE_WALL && right == TYPE_WALL && left == TYPE_WALL
+                        && under != TYPE_WALL);
+                boolean localTerm2 = (top == TYPE_WALL && right == TYPE_WALL && left != TYPE_WALL
+                        && under == TYPE_WALL);
+                boolean localTerm3 = (top == TYPE_WALL && right != TYPE_WALL && left == TYPE_WALL
+                        && under == TYPE_WALL);
+                boolean localTerm4 = (top != TYPE_WALL && right == TYPE_WALL && left == TYPE_WALL
+                        && under == TYPE_WALL);
+                if ((localTerm1 || localTerm2 || localTerm3 || localTerm4) && enter != TYPE_WALL) {
+
+                    if (!(x == 1 && y == 1)) {
+                        candidate[localCount][0] = x;
+                        candidate[localCount][1] = y;
+                        localCount++;
+                    }
+
+                }
+            }
+        }
+        localCount--;
+
+        int randomGoal = (int) (Math.random() * localCount);
+        goal[0] = candidate[randomGoal][0];
+        goal[1] = candidate[randomGoal][1];
+        System.out.println(goal[0] + "," + goal[1]);
+        return goal;
     }
 
     public static int getMap(int x, int y) {
@@ -144,6 +201,10 @@ public class MapData {
             return 15;
         }
 
+        // GOAL
+        if (enter == TYPE_GOAL) {
+            return TYPE_GOAL;
+        }
         // SPACE
         if (enter == 0) {
             return 0;
