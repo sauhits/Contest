@@ -7,10 +7,10 @@ public class ItemDB {
     public static final int BANANA = 10;
     public static final int FISH = 11;
     public static final int SAKE = 12;
-    public static final int BANANA_STOP = 100;
+    public static final int BANANA_STOP = 1000;
     private static int spaceCount;
-    private int moveFISHGain;
-    private int moveSakeGain;
+    public static int moveFISHGain = 1;
+    public static int moveSakeGain = 1;
     private static int[][] listMapSpaceCoordinate = new int[150][2];
 
     public ItemDB() {
@@ -54,7 +54,9 @@ public class ItemDB {
     // BANANA_STOP秒間停止する
     static void actionBANANA() {
         try {
+            moveFISHGain = 0;
             Thread.sleep(BANANA_STOP);
+            moveFISHGain = 1;
         } catch (InterruptedException e) {
             // 例外処理
             System.out.println("Error: actionBANANA");
@@ -62,23 +64,23 @@ public class ItemDB {
     }
 
     // 移動量が2倍になる
-    public void actionFISH() {
+    public static void actionFISH() {
         moveFISHGain = 2;
     }
 
     // 入力が逆になる
-    public void actionSAKE() {
-        moveSakeGain = -1;
-        TimerTask task = new TimerTask() {
-            public void run() {
-                moveSakeGain = 1;
-            }
-        };
-        Timer timer = new Timer();
-        timer.schedule(task, 100);
+    public static void actionSAKE() {
+        try {
+            moveSakeGain = -1;
+            Thread.sleep(BANANA_STOP);
+            moveSakeGain = 1;
+        } catch (InterruptedException e) {
+            // 例外処理
+            System.out.println("Error: actionBANANA");
+        }
     }
 
-    public void startAction(int Item) {
+    public static void startAction(int Item) {
         System.out.println("Item: " + Item);
         switch (Item) {
             case 0:

@@ -117,7 +117,6 @@ public class MapData {
                 boolean localTerm4 = (top != TYPE_WALL && right == TYPE_WALL && left == TYPE_WALL
                         && under == TYPE_WALL);
                 if ((localTerm1 || localTerm2 || localTerm3 || localTerm4) && enter != TYPE_WALL) {
-
                     if (!(x == 1 && y == 1)) {
                         candidate[localCount][0] = x;
                         candidate[localCount][1] = y;

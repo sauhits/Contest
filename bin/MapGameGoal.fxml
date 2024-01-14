@@ -13,5 +13,5 @@
 		<Button onAction="#onGameGoalAction" text="もう一度プレイする">
 		</Button>
 
-  </children>
+  	</children>
 </VBox>
