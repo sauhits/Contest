@@ -18,7 +18,10 @@ public class MapData {
             "png/WALL-9.png", // 9
             "png/WALL-10.png", // 10
             "png/WALL-11.png", // 11
-            "png/WALL.png"// 12
+            "png/WALL.png", // 12
+            "png/bell.png", // 13 BANANA
+            "png/apple.png", // 14 FISH
+            "png/pear.png"// 15 SAKE
     };
 
     private Image[] mapImages;
@@ -28,9 +31,9 @@ public class MapData {
     private static int height; // height of the map
 
     MapData(int x, int y) {
-        mapImages = new Image[13];
+        mapImages = new Image[mapImageFiles.length];
         mapImageViews = new ImageView[y][x];
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < mapImageFiles.length; i++) {
             mapImages[i] = new Image(mapImageFiles[i]);
         }
         width = x;
@@ -38,6 +41,9 @@ public class MapData {
         maps = new int[y][x];
         fillMap(MapData.TYPE_WALL);
         digMap(1, 3);
+        ItemDB.setItem(ItemDB.BANANA);
+        ItemDB.setItem(ItemDB.FISH);
+        ItemDB.setItem(ItemDB.SAKE);
         setImageViews();
     }
 
@@ -126,6 +132,17 @@ public class MapData {
         }
 
         int enter = maps[y][x];
+
+        // Item
+        if (enter == ItemDB.BANANA) {
+            return 13;
+        }
+        if (enter == ItemDB.FISH) {
+            return 14;
+        }
+        if (enter == ItemDB.SAKE) {
+            return 15;
+        }
 
         // SPACE
         if (enter == 0) {

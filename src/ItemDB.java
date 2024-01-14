@@ -8,44 +8,47 @@ public class ItemDB {
     public static final int FISH = 11;
     public static final int SAKE = 12;
     public static final int BANANA_STOP = 100;
-    private int SpaceCount;
+    private static int spaceCount;
     private int moveFISHGain;
     private int moveSakeGain;
-    private int[][] listMapSpaceCoordinate = new int[150][2];
+    private static int[][] listMapSpaceCoordinate = new int[150][2];
 
     public ItemDB() {
-        this.SpaceCount = 0;
+        this.spaceCount = 0;
         this.moveFISHGain = 1;
         this.moveSakeGain = 1;
         updateSpaceList();
     }
 
     //
-    public void updateSpaceList() {
+    public static void updateSpaceList() {
+        spaceCount = 0;
         for (int y = 0; y < MapData.getHeight(); y++) {
             for (int x = 0; x < MapData.getWidth(); x++) {
-                if (MapData.getMap(x,y) == MapData.TYPE_SPACE) {
-                    listMapSpaceCoordinate[SpaceCount][0] = x;
-                    listMapSpaceCoordinate[SpaceCount][1] = y;
-                    SpaceCount++;
+                if (MapData.getMap(x, y) == MapData.TYPE_SPACE) {
+                    listMapSpaceCoordinate[spaceCount][0] = x;
+                    listMapSpaceCoordinate[spaceCount][1] = y;
+                    spaceCount++;
                 }
             }
         }
-        SpaceCount--;
+        spaceCount--;
     }
 
     // randomに設置可能な座標を返す
-    public int[] getItemCoordinate() {
+    public static int[] getItemCoordinate() {
+        updateSpaceList();
         int[] coordinate = new int[2];
-        int randomNum = (int) (Math.random() * SpaceCount);
+        int randomNum = (int) (Math.random() * spaceCount);
         coordinate[0] = listMapSpaceCoordinate[randomNum][0];
         coordinate[1] = listMapSpaceCoordinate[randomNum][1];
         return coordinate;
     }
 
-    public void setItem(int Item) {
+    public static void setItem(int Item) {
         int[] setCoordinate = getItemCoordinate();
-        MapData.setMap(setCoordinate[0],setCoordinate[1],Item);
+        System.out.println(setCoordinate[0] + "," + setCoordinate[1]);
+        MapData.setMap(setCoordinate[0], setCoordinate[1], Item);
     }
 
     // BANANA_STOP秒間停止する
