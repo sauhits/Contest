@@ -1,18 +1,27 @@
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.fxml.Initializable;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
 
 public class MapGameController implements Initializable {
     public MapData mapData;
     public MoveChara chara;
     public GridPane mapGrid;
     public ImageView[] mapImageViews;
+    static int limitSecond;
+    @FXML
+    private Label labelTime;
+    static final int SECOND = 30;
+    private Timer timer;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -26,6 +35,7 @@ public class MapGameController implements Initializable {
             }
         }
         drawMap(chara, mapData);
+        timeAction();
     }
 
     // Draw the map
@@ -49,14 +59,28 @@ public class MapGameController implements Initializable {
     public void keyAction(KeyEvent event) {
         KeyCode key = event.getCode();
         System.out.println("keycode:" + key);
-        if (key == KeyCode.A) {
-            leftButtonAction();
-        } else if (key == KeyCode.S) {
-            downButtonAction();
-        } else if (key == KeyCode.W) {
-            upButtonAction();
-        } else if (key == KeyCode.D) {
-            rightButtonAction();
+        if (ItemDB.moveFISHGain == 1) {
+            // 通常
+            if (key == KeyCode.A) {
+                leftButtonAction();
+            } else if (key == KeyCode.S) {
+                downButtonAction();
+            } else if (key == KeyCode.W) {
+                upButtonAction();
+            } else if (key == KeyCode.D) {
+                rightButtonAction();
+            }
+        } else {
+            // sakeOn
+            if (key == KeyCode.A) {
+                rightButtonAction();
+            } else if (key == KeyCode.S) {
+                upButtonAction();
+            } else if (key == KeyCode.W) {
+                downButtonAction();
+            } else if (key == KeyCode.D) {
+                leftButtonAction();
+            }
         }
     }
 
@@ -108,7 +132,7 @@ public class MapGameController implements Initializable {
     @FXML
     public void func2ButtonAction(ActionEvent event) {
         System.out.println("Remap");
-        initialize(null,null);
+        initialize(null, null);
     }
 
     @FXML
@@ -126,4 +150,35 @@ public class MapGameController implements Initializable {
         System.out.println("Action: " + actionString);
     }
 
+    @FXML
+    public void timeAction() {
+        timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    try {
+                        if (limitSecond <= SECOND) {
+                            int limit = SECOND - limitSecond;
+                            labelTime.setText("あと " + limit + " 秒");
+                            limitSecond++;
+                        } else {
+                            // 30秒経過
+                            timer.cancel();
+                            // タイマーが発火したときに実行される処理
+                            StageDB.getMainStage().hide();
+                            // StageDB.getMainSound().stop();
+                            StageDB.getGameOverStage().show();
+                            // StageDB.getGameOverSound().play();
+                            System.out.println("タイマーが動作しました");
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                });
+            }
+        };
+        timer.schedule(task, 0, 1000);
+    }
 }

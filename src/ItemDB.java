@@ -2,8 +2,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ItemDB {
-    // MapのSPACEを入れるリストの作成
-    // static List<Integer>[] listMapSpaceCoordinate=new ArrayList<>();
     public static int itemCount = 0;
     public static final int BANANA = 10;
     public static final int FISH = 11;
@@ -60,7 +58,7 @@ public class ItemDB {
             moveFISHGain = 1;
         } catch (InterruptedException e) {
             // 例外処理
-            System.out.println("Error: actionBANANA");
+            e.printStackTrace();
         }
     }
 
@@ -71,14 +69,7 @@ public class ItemDB {
 
     // 入力が逆になる
     public static void actionSAKE() {
-        try {
-            moveSakeGain = -1;
-            Thread.sleep(BANANA_STOP);
-            moveSakeGain = 1;
-        } catch (InterruptedException e) {
-            // 例外処理
-            System.out.println("Error: actionBANANA");
-        }
+        moveSakeGain = -1;
     }
 
     public static void startAction(int Item) {

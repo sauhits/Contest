@@ -72,8 +72,8 @@ public class MoveChara {
     public boolean move(int dx, int dy) {
         if (isMovable(dx, dy)) {
             for (int i = 0; i < ItemDB.moveFISHGain; i++) {
-                posX += (dx * ItemDB.moveSakeGain);
-                posY += (dy * ItemDB.moveSakeGain);
+                posX += dx;
+                posY += dy;
             }
             System.out.println("chara[X,Y]:" + posX + "," + posY);
             // アイテム条件を後に追加する

@@ -55,6 +55,7 @@ class StageDB {
     }
 
     public static Stage getMainStage() {
+        MapGameController mapGameController=new MapGameController();
         if (mainStage == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(mainClass.getResource("MapGame.fxml"));
