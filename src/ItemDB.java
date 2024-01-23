@@ -11,7 +11,7 @@ public class ItemDB {
     public static int moveSakeGain = 1;
     private static int[][] listMapSpaceCoordinate = new int[150][2];
 
-    public ItemDB() {
+    ItemDB() {
         ItemDB.spaceCount = 0;
         ItemDB.moveFISHGain = 1;
         ItemDB.moveSakeGain = 1;

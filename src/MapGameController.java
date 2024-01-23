@@ -37,6 +37,7 @@ public class MapGameController implements Initializable {
         }
         drawMap(chara, mapData);
         timeAction();
+        new ItemDB();
     }
 
     // Draw the map
