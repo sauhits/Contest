@@ -22,6 +22,7 @@ public class MapGameController implements Initializable {
     private Label labelTime;
     static final int SECOND = 30;
     private Timer timer;
+    private static boolean timerFlag = false;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -152,6 +153,12 @@ public class MapGameController implements Initializable {
 
     @FXML
     public void timeAction() {
+        if (timerFlag) {
+            // 既にタイマーが起動しているため重複を防ぐ
+            timer.cancel();
+            limitSecond = 0;
+        }
+        timerFlag = true;
         timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
