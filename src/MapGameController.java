@@ -28,10 +28,10 @@ public class MapGameController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         mapData = new MapData(21, 15);
         chara = new MoveChara(1, 1, mapData);
-        mapImageViews = new ImageView[mapData.getHeight() * mapData.getWidth()];
-        for (int y = 0; y < mapData.getHeight(); y++) {
-            for (int x = 0; x < mapData.getWidth(); x++) {
-                int index = y * mapData.getWidth() + x;
+        mapImageViews = new ImageView[MapData.getHeight() * MapData.getWidth()];
+        for (int y = 0; y < MapData.getHeight(); y++) {
+            for (int x = 0; x < MapData.getWidth(); x++) {
+                int index = y * MapData.getWidth() + x;
                 mapImageViews[index] = mapData.getImageView(x, y);
             }
         }
@@ -44,9 +44,9 @@ public class MapGameController implements Initializable {
         int cx = c.getPosX();
         int cy = c.getPosY();
         mapGrid.getChildren().clear();
-        for (int y = 0; y < mapData.getHeight(); y++) {
-            for (int x = 0; x < mapData.getWidth(); x++) {
-                int index = y * mapData.getWidth() + x;
+        for (int y = 0; y < MapData.getHeight(); y++) {
+            for (int x = 0; x < MapData.getWidth(); x++) {
+                int index = y * MapData.getWidth() + x;
                 if (x == cx && y == cy) {
                     mapGrid.add(c.getCharaImageView(), x, y);
                 } else {

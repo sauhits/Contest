@@ -12,9 +12,9 @@ public class ItemDB {
     private static int[][] listMapSpaceCoordinate = new int[150][2];
 
     public ItemDB() {
-        this.spaceCount = 0;
-        this.moveFISHGain = 1;
-        this.moveSakeGain = 1;
+        ItemDB.spaceCount = 0;
+        ItemDB.moveFISHGain = 1;
+        ItemDB.moveSakeGain = 1;
         updateSpaceList();
     }
 

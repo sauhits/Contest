@@ -13,7 +13,6 @@ public class MoveChara {
     private final String pngPathSuf = ".png";
     private int posX;
     private int posY;
-    private MapData mapData;
     private Image[][] charaImages;
     private ImageView[] charaImageViews;
     private ImageAnimation[] charaImageAnimations;
@@ -22,8 +21,6 @@ public class MoveChara {
     ////////////////////////////////////////////////////////////////
 
     MoveChara(int startX, int startY, MapData mapData) {
-        this.mapData = mapData;
-
         charaImages = new Image[4][2];
         charaImageViews = new ImageView[4];
         charaImageAnimations = new ImageAnimation[4];
@@ -59,10 +56,10 @@ public class MoveChara {
 
     // check whether the cat can move on
     private boolean isMovable(int dx, int dy) {
-        ItemDB.startAction(mapData.getMap(posX + dx, posY + dy));
-        if (mapData.getMap(posX + dx, posY + dy) == MapData.TYPE_WALL) {
+        ItemDB.startAction(MapData.getMap(posX + dx, posY + dy));
+        if (MapData.getMap(posX + dx, posY + dy) == MapData.TYPE_WALL) {
             return false;
-        } else if (mapData.getMap(posX + dx, posY + dy) != MapData.TYPE_WALL) {
+        } else if (MapData.getMap(posX + dx, posY + dy) != MapData.TYPE_WALL) {
             return true;
         }
         return false;
@@ -77,7 +74,7 @@ public class MoveChara {
             }
             System.out.println("chara[X,Y]:" + posX + "," + posY);
             // アイテム条件を後に追加する
-            if (mapData.getMap(posX, posY) == MapData.TYPE_GOAL) {
+            if (MapData.getMap(posX, posY) == MapData.TYPE_GOAL) {
                 if (ItemDB.IsGetAllItems()) {
                     System.out.println("GOAL");
                     StageDB.getMainStage().hide();
