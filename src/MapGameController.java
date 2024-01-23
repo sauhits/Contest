@@ -123,9 +123,9 @@ public class MapGameController implements Initializable {
         try {
             System.out.println("func1");
             StageDB.getMainStage().hide();
-            // StageDB.getMainSound().stop();
+            StageDB.getMainSound().stop();
             StageDB.getGameOverStage().show();
-            // StageDB.getGameOverSound().play();
+            StageDB.getGameOverSound().play();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -175,9 +175,9 @@ public class MapGameController implements Initializable {
                             timer.cancel();
                             // タイマーが発火したときに実行される処理
                             StageDB.getMainStage().hide();
-                            // StageDB.getMainSound().stop();
+                            StageDB.getMainSound().stop();
                             StageDB.getGameOverStage().show();
-                            // StageDB.getGameOverSound().play();
+                            StageDB.getGameOverSound().play();
                             System.out.println("タイマーが動作しました");
                         }
                     } catch (Exception e) {
