@@ -7,10 +7,10 @@ public class GameGoalController {
 	void onGameGoalAction(ActionEvent event) {
 		try {
 			StageDB.getGameGoalStage().hide();
-			// StageDB.getMainSound().stop();
+			StageDB.getMainSound().stop();
 			// 後にマップ再生成の要素を追加
 			StageDB.getMainStage().show();
-			// StageDB.getMainSound().play();
+			StageDB.getMainSound().play();
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}
