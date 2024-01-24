@@ -117,7 +117,7 @@ public class MapData {
                 boolean localTerm4 = (top != TYPE_WALL && right == TYPE_WALL && left == TYPE_WALL
                         && under == TYPE_WALL);
                 if ((localTerm1 || localTerm2 || localTerm3 || localTerm4) && enter != TYPE_WALL) {
-                    if (!(x == 1 && y == 1)) {
+                    if (!(x == 2 && y == 2)) {
                         candidate[localCount][0] = x;
                         candidate[localCount][1] = y;
                         localCount++;
@@ -153,13 +153,6 @@ public class MapData {
         return mapImageViews[y][x];
     }
 
-    // public void setImageViews() {
-    // for (int y = 0; y < height; y++) {
-    // for (int x = 0; x < width; x++) {
-    // mapImageViews[y][x] = new ImageView(mapImages[maps[y][x]]);
-    // }
-    // }
-    // }
 
     public void setImageViews() {
         for (int y = 0; y < height; y++) {

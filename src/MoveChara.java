@@ -56,8 +56,10 @@ public class MoveChara {
 
     // check whether the cat can move on
     private boolean isMovable(int dx, int dy) {
-        ItemDB.startAction(MapData.getMap(posX + dx, posY + dy));
+        ItemDB.startAction(posX + dx, posY + dy);
         if (MapData.getMap(posX + dx, posY + dy) == MapData.TYPE_WALL) {
+            return false;
+        } else if (ItemDB.moveBANANAGain != 1) {
             return false;
         } else if (MapData.getMap(posX + dx, posY + dy) != MapData.TYPE_WALL) {
             return true;
@@ -68,21 +70,18 @@ public class MoveChara {
     // move the cat
     public boolean move(int dx, int dy) {
         if (isMovable(dx, dy)) {
-            for (int i = 0; i < ItemDB.moveFISHGain; i++) {
-                posX += dx;
-                posY += dy;
-            }
+            posX += dx;
+            posY += dy;
             System.out.println("chara[X,Y]:" + posX + "," + posY);
             // アイテム条件を後に追加する
             if (MapData.getMap(posX, posY) == MapData.TYPE_GOAL) {
                 if (ItemDB.IsGetAllItems()) {
                     System.out.println("GOAL");
                     StageDB.getMainStage().hide();
-                    // StageDB.getMainSound().stop();
+                    StageDB.getMainSound().stop();
                     StageDB.getGameGoalStage().show();
                 } else {
                     System.out.println("You must get all items!");
-
                 }
             }
             return true;

@@ -11,7 +11,7 @@ public class MapGame extends Application {
     stage.hide();
     StageDB.setMainClass(getClass());
     StageDB.getMainStage().show();
-    // StageDB.getMainSound().play();
+    StageDB.getMainSound().play();
     
     
   }
@@ -20,3 +20,5 @@ public class MapGame extends Application {
     launch(args);
   }
 }
+
+            // "vmArgs": "--module-path \"C:\\Program Files\\javafx-sdk-21.0.1\\lib\" --add-modules javafx.controls,javafx.fxml"

@@ -1,20 +1,29 @@
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javafx.application.Platform;
+
+// BANANA->bell
+// FISH->apple
+// SAKE->pear
 
 public class ItemDB {
     public static int itemCount = 0;
     public static final int BANANA = 10;
     public static final int FISH = 11;
     public static final int SAKE = 12;
-    public static final int BANANA_STOP = 1000;
+    public static final int BANANA_STOP = 10000;
     private static int spaceCount;
-    public static int moveFISHGain = 1;
-    public static int moveSakeGain = 1;
+    public static int moveBANANAGain;
+    public static int moveFISHGain;
+    public static int moveSAKEGain;
     private static int[][] listMapSpaceCoordinate = new int[150][2];
 
     ItemDB() {
         ItemDB.spaceCount = 0;
         ItemDB.moveFISHGain = 1;
-        ItemDB.moveSakeGain = 1;
+        ItemDB.moveSAKEGain = 1;
+        ItemDB.moveBANANAGain = 1;
         updateSpaceList();
     }
 
@@ -51,14 +60,22 @@ public class ItemDB {
 
     // BANANA_STOP秒間停止する
     static void actionBANANA() {
-        try {
-            moveFISHGain = 0;
-            Thread.sleep(BANANA_STOP);
-            moveFISHGain = 1;
-        } catch (InterruptedException e) {
-            // 例外処理
-            e.printStackTrace();
-        }
+
+        moveBANANAGain = 0;
+        Timer timerBANANA = new Timer();
+        TimerTask taskBANANA = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    try {
+                        moveBANANAGain = 1;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+        };
+        timerBANANA.schedule(taskBANANA, BANANA_STOP);
     }
 
     // 移動量が2倍になる
@@ -68,10 +85,12 @@ public class ItemDB {
 
     // 入力が逆になる
     public static void actionSAKE() {
-        moveSakeGain = -1;
+        moveSAKEGain = -1;
     }
 
-    public static void startAction(int Item) {
+    public static void startAction(int x,int y) {
+        int Item;
+        Item=MapData.getMap(x, y);
         System.out.println("Item: " + Item);
         switch (Item) {
             case 0:

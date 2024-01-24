@@ -61,7 +61,7 @@ public class MapGameController implements Initializable {
     public void keyAction(KeyEvent event) {
         KeyCode key = event.getCode();
         System.out.println("keycode:" + key);
-        if (ItemDB.moveFISHGain == 1) {
+        if (ItemDB.moveSAKEGain == 1) {
             // 通常
             if (key == KeyCode.A) {
                 leftButtonAction();
@@ -175,9 +175,9 @@ public class MapGameController implements Initializable {
                             timer.cancel();
                             // タイマーが発火したときに実行される処理
                             StageDB.getMainStage().hide();
-                            // StageDB.getMainSound().stop();
+                            StageDB.getMainSound().stop();
                             StageDB.getGameOverStage().show();
-                            // StageDB.getGameOverSound().play();
+                            StageDB.getGameOverSound().play();
                             System.out.println("タイマーが動作しました");
                         }
                     } catch (Exception e) {
