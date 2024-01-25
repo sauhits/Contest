@@ -12,7 +12,7 @@ public class ItemDB {
     public static final int BANANA = 10;
     public static final int FISH = 11;
     public static final int SAKE = 12;
-    public static final int BANANA_STOP = 10000;
+    public static final int BANANA_STOP = 1000;
     private static int spaceCount;
     public static int moveBANANAGain;
     public static int moveFISHGain;

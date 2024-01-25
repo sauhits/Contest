@@ -61,7 +61,8 @@ public class MapGameController implements Initializable {
     public void keyAction(KeyEvent event) {
         KeyCode key = event.getCode();
         System.out.println("keycode:" + key);
-        if (ItemDB.moveSAKEGain == 1) {
+        for(int i=0;i<ItemDB.moveFISHGain;i++){
+            if (ItemDB.moveSAKEGain == 1) {
             // 通常
             if (key == KeyCode.A) {
                 leftButtonAction();
@@ -84,6 +85,8 @@ public class MapGameController implements Initializable {
                 leftButtonAction();
             }
         }
+        }
+        
     }
 
     // Operations for going the cat up
