@@ -87,9 +87,10 @@ class StageDB {
     }
 
     public static Stage getGameGoalStage() {
+        GameGoalController gameGoalController=new GameGoalController();
         if (gameGoalStage == null) {
             try {
-                System.out.println("StageDB:getGameGoalStage()");
+                System.out.println("StageDB:getGameGoalStages()");
                 FXMLLoader loader = new FXMLLoader(mainClass.getResource("MapGameGoal.fxml"));
                 VBox root = loader.load();
                 Scene scene = new Scene(root);

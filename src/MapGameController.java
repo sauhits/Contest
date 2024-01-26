@@ -13,14 +13,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class MapGameController implements Initializable {
-    public MapData mapData;
-    public MoveChara chara;
+    public static MapData mapData;
+    public static MoveChara chara;
     public GridPane mapGrid;
     public ImageView[] mapImageViews;
     static int limitSecond;
     @FXML
     private Label labelTime;
-    static final int SECOND = 10;
+    static final int SECOND = 999;
     private Timer timer;
     private static boolean timerFlag = false;
 
@@ -61,32 +61,32 @@ public class MapGameController implements Initializable {
     public void keyAction(KeyEvent event) {
         KeyCode key = event.getCode();
         System.out.println("keycode:" + key);
-        for(int i=0;i<ItemDB.moveFISHGain;i++){
+        for (int i = 0; i < ItemDB.moveFISHGain; i++) {
             if (ItemDB.moveSAKEGain == 1) {
-            // 通常
-            if (key == KeyCode.A) {
-                leftButtonAction();
-            } else if (key == KeyCode.S) {
-                downButtonAction();
-            } else if (key == KeyCode.W) {
-                upButtonAction();
-            } else if (key == KeyCode.D) {
-                rightButtonAction();
-            }
-        } else {
-            // sakeOn
-            if (key == KeyCode.A) {
-                rightButtonAction();
-            } else if (key == KeyCode.S) {
-                upButtonAction();
-            } else if (key == KeyCode.W) {
-                downButtonAction();
-            } else if (key == KeyCode.D) {
-                leftButtonAction();
+                // 通常
+                if (key == KeyCode.A) {
+                    leftButtonAction();
+                } else if (key == KeyCode.S) {
+                    downButtonAction();
+                } else if (key == KeyCode.W) {
+                    upButtonAction();
+                } else if (key == KeyCode.D) {
+                    rightButtonAction();
+                }
+            } else {
+                // sakeOn
+                if (key == KeyCode.A) {
+                    rightButtonAction();
+                } else if (key == KeyCode.S) {
+                    upButtonAction();
+                } else if (key == KeyCode.W) {
+                    downButtonAction();
+                } else if (key == KeyCode.D) {
+                    leftButtonAction();
+                }
             }
         }
-        }
-        
+
     }
 
     // Operations for going the cat up

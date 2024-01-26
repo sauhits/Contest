@@ -2,7 +2,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class MapGame extends Application {
-  Stage stage;
+  public Stage stage;
 
   @Override
   public void start(Stage primaryStage) throws Exception {

@@ -10,8 +10,9 @@ public class GameOverController {
 			StageDB.getMainSound().stop();
 			StageDB.getMainStage().show();
 			StageDB.getMainSound().play();
-			MapGameController mapGameController=new MapGameController();
+			MapGameController mapGameController =new MapGameController();
 			mapGameController.initialize(null, null);
+			
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}

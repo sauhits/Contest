@@ -20,6 +20,7 @@ public class ItemDB {
     private static int[][] listMapSpaceCoordinate = new int[150][2];
 
     ItemDB() {
+        ItemDB.itemCount = 0;
         ItemDB.spaceCount = 0;
         ItemDB.moveFISHGain = 1;
         ItemDB.moveSAKEGain = 1;
@@ -101,21 +102,21 @@ public class ItemDB {
                 break;
             case 10:
                 // BANANA
-                MapData.setMap(x, y,MapData.TYPE_WALL);
+                MapData.setMap(x, y,MapData.TYPE_SPACE);
                 addItemCount(1);
                 System.out.println("itemCount:" + itemCount);
                 actionBANANA();
                 break;
             case 11:
                 // FISH
-                MapData.setMap(x, y,MapData.TYPE_WALL);
+                MapData.setMap(x, y,MapData.TYPE_SPACE);
                 addItemCount(1);
                 System.out.println("itemCount:" + itemCount);
                 actionFISH();
                 break;
             case 12:
                 // SAKE
-                MapData.setMap(x, y,MapData.TYPE_WALL);
+                MapData.setMap(x, y,MapData.TYPE_SPACE);
                 addItemCount(1);
                 System.out.println("itemCount:" + itemCount);
                 actionSAKE();

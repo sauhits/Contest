@@ -19,8 +19,6 @@
       <children>
 			<Button text="GameEnd" prefWidth="100" onAction="#func1ButtonAction"/>
 			<Button text="ReMap" prefWidth="100" onAction="#func2ButtonAction"/>
-			<Button text="func3" prefWidth="100" onAction="#func3ButtonAction"/>
-			<Button text="func4" prefWidth="100" onAction="#func4ButtonAction"/>
       <Label fx:id="labelTime" text="">
         <font>
           <Font name="Meiryo UI" size="22.0" />
