@@ -9,8 +9,5 @@
 <VBox fx:controller="GameGoalController" xmlns:fx="http://javafx.com/fxml">
   	<children>
 	        <Label text="GameClear!" /> 
-		<Button onAction="#onGameGoalAction" text="もう一度プレイする">
-		</Button>
-
   	</children>
 </VBox>

@@ -20,7 +20,7 @@ public class MapGameController implements Initializable {
     static int limitSecond;
     @FXML
     private Label labelTime;
-    static final int SECOND = 999;
+    static final int SECOND = 5;
     private Timer timer;
     private static boolean timerFlag = false;
 

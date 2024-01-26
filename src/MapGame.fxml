@@ -18,7 +18,7 @@
     <HBox prefHeight="50">
       <children>
 			<Button text="GameEnd" prefWidth="100" onAction="#func1ButtonAction"/>
-			<Button text="ReMap" prefWidth="100" onAction="#func2ButtonAction"/>
+			<Button text="ReStart" prefWidth="100" onAction="#func2ButtonAction"/>
       <Label fx:id="labelTime" text="">
         <font>
           <Font name="Meiryo UI" size="22.0" />

@@ -12,7 +12,6 @@ public class GameGoalController {
 			MapGameController mapGameController = new MapGameController();
 			mapGameController.initialize(null, null);
 			StageDB.getMainStage().show();
-
 			StageDB.getMainSound().play();
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
