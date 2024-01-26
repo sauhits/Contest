@@ -101,18 +101,21 @@ public class ItemDB {
                 break;
             case 10:
                 // BANANA
+                MapData.setMap(x, y,MapData.TYPE_WALL);
                 addItemCount(1);
                 System.out.println("itemCount:" + itemCount);
                 actionBANANA();
                 break;
             case 11:
                 // FISH
+                MapData.setMap(x, y,MapData.TYPE_WALL);
                 addItemCount(1);
                 System.out.println("itemCount:" + itemCount);
                 actionFISH();
                 break;
             case 12:
                 // SAKE
+                MapData.setMap(x, y,MapData.TYPE_WALL);
                 addItemCount(1);
                 System.out.println("itemCount:" + itemCount);
                 actionSAKE();
